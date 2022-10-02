@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Bob_Ross_Intro.mp3-99796c9dc9d58a348b6e6c84b10c53cb.mp3str"
+
+[deps]
+
+source_file="res://Level_Scenes/Bob_Ross_Intro.mp3"
+dest_files=[ "res://.import/Bob_Ross_Intro.mp3-99796c9dc9d58a348b6e6c84b10c53cb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
