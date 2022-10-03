@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
+var died : bool = false
 onready var animationPlayer = $AnimationPlayer
 onready var sprite = $Sprite
+onready var hurtbox = $Hurtbox
 var motion = Vector2.ZERO # Used to store the velocity that the player is traveling at
 
 # Player movement variables
@@ -40,4 +42,13 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_Hurtbox_body_entered(_body):
-	MicrogameJamController.LoseGame()
+	# Begin to disable the player
+	if not died:
+		died = true
+		hurtbox.queue_free()
+		set_physics_process(false)
+		sprite.rotation = deg2rad(90)
+		sprite.texture = load("res://Player/Devil_Dead.png")
+		$LoseAudio.play()
+		yield(get_tree().create_timer(0.9), "timeout")
+		MicrogameJamController.LoseGame()

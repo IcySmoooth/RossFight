@@ -122,12 +122,16 @@ script = ExtResource( 2 )
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -19.227
+volume_db = -15.0
+
+[node name="DifficultySelectTimer" type="Timer" parent="."]
+wait_time = 1.6
+one_shot = true
+autostart = true
 
 [node name="Lmao" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.282353 )
-position = Vector2( 732, 248 )
-scale = Vector2( 2, 2 )
+position = Vector2( 504, 248 )
+scale = Vector2( 3.64029, 2 )
 texture = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -223,7 +227,7 @@ text = "Dodge"
 
 [node name="WinSound" type="AudioStreamPlayer" parent="WinScreen"]
 stream = ExtResource( 8 )
-volume_db = -10.0
+volume_db = -2.0
 
 [connection signal="timeout" from="Paint_Spawn_Timer" to="." method="_on_Paint_Spawn_Timer_timeout"]
 [connection signal="animation_finished" from="Intro_Animation/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

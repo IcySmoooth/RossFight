@@ -10,13 +10,12 @@ var randomizeSpeed : bool = true
 export var speed : float = 275
 
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	"""
-	if randomizeSpeed:
-		rng.randomize()
-		speed = rng.randf_range(350, 450)"""
+
 
 
 func _projectile_movement():

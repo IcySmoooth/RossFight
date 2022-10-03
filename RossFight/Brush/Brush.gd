@@ -4,7 +4,9 @@ var velocity = Vector2.ZERO
 var speed = 300
 
 # Paint drop reference
-onready var paintDrop = preload("res://Enemy_Projectiles/PaintDrop.tscn")
+onready var paintDropGreen = preload("res://Enemy_Projectiles/PaintDrop.tscn")
+onready var paintDropYellow = preload("res://Enemy_Projectiles/PaintDrop_Yellow.tscn")
+onready var paintDropBlue = preload("res://Enemy_Projectiles/PaintDrop_Blue.tscn")
 
 onready var sprite = $Sprite
 onready var spawnPosition = $Sprite/Position2D
@@ -17,10 +19,37 @@ var threeSpread : bool = false
 
 var brushLifetime = 2
 
+var rng = RandomNumberGenerator.new()
+
+onready var greenBrush = preload("res://Brush/Brush_Green.png")
+onready var yellowBrush = preload("res://Brush/Brush_Yellow.png")
+onready var blueBrush = preload("res://Brush/Brush_Blue.png")
+
+var currentColor
+
+enum Colors {
+	Green
+	Yellow
+	Blue
+}
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set the texture to be a random color
+	rng.randomize()
+	
+	currentColor = rng.randi_range(0, 2)
+	match currentColor:
+		Colors.Green:
+			sprite.texture = greenBrush
+		Colors.Yellow:
+			sprite.texture = yellowBrush
+		Colors.Blue:
+			sprite.texture = blueBrush
+	
+	
 	# Rotate the brush to look at the center of the camera
 	rotation = (centerCoords - global_position).angle() - deg2rad(90)
 	
@@ -38,7 +67,17 @@ func set_backward_speed():
 
 
 func spawn_paint():
-	var drop = paintDrop.instance()
+	var drop
+	# Set its colored texture
+	match currentColor:
+		Colors.Green:
+			drop = paintDropGreen.instance()
+		Colors.Yellow:
+			drop = paintDropYellow.instance()
+		Colors.Blue:
+			drop = paintDropBlue.instance()
+	
+	
 	drop.rotation = rotation - deg2rad(270)
 	drop.global_position = spawnPosition.global_position
 	get_parent().add_child(drop)
